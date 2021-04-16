@@ -1,0 +1,59 @@
+https://www.tehnomanija.rs
+
+Napravit automatizaciju za registraciju na tehnomanija.rs, ali pametnu da ga mozes runat koliko hoćeš puta.
+paralelno jedan test u firefox, jedan test u chrome i na kraju napravit allure report koji ima screenshot
+
+
+Koristiti:
+Maven
+Test Ng
+POM tj.da imas klase koje predtavljaju pejdževe
+može i Page factory moze al je svejedno
+Reporter Allure
+Screenshot
+Firefox i chrome
+
+firefox i chrome i idu paralelno
+
+
+
+
+
+klik/hover na PRIJAVA   [class= "user-name"]
+klik na REGISTRUJTE SE  //a[text()='Registrujte se']
+
+https://www.tehnomanija.rs/index.php?mod=customers&op=register
+Formular za registraciju
+
+Fizičko lice
+Gospođa  //input[@id='title1']   xpath
+
+Mandatory: Ime, Prezime, Email, Potvrda email-a, Lozinka, Potvrda lozinke, broj telefona, Datum rođenja
+SendKeys
+
+Vaša lozinka mora imati najmanje 6 karaktera, mala i velika slova, brojeve i znakove interpunkcije.
+
+
+Dodatni podaci o korisniku
+ i to popunjavaj
+
+klik na Slažem se .......
+
+Nisam robot
+
+klik na Nisam robot i screen shot ako dobijes zelenu kvacicu 
+if getAttribute style  display is non klikni na Registracija else
+
+
+Screenshot
+
+
+
+
+
+
+
+Uspešno ste se registrovali.
+
+Hvala.
+Vaša Tehnomanija!
