@@ -1,19 +1,23 @@
 package test;
 
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
+
+import io.qameta.allure.Description;
+import listeners.AllureTestNGListeners;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pom_classes.TehnomanijaHomePage;
 import pom_classes.TehnomanijaRegistracijaPage;
 import selenium_core.DriverManager;
-import selenium_core.DriverManagerFactory;
 
-import java.util.concurrent.TimeUnit;
 
-public class TehnomanijaTests {
-    WebDriver driver;
+import java.io.IOException;
+
+
+@Listeners(AllureTestNGListeners.class)
+public class TehnomanijaTests extends BaseTest{
+
     String URL = "https://www.tehnomanija.rs/";
     DriverManager driverManager;
     TehnomanijaRegistracijaPage tehnomanijaRegistracijaPage;
@@ -21,15 +25,14 @@ public class TehnomanijaTests {
 
     @BeforeMethod
     public void setup(){
-        driverManager = DriverManagerFactory.getDriverManager("CHROME"); //ovo treba biti parametar, a u testng napišeš vrijednost parametra
-        driver = driverManager.getWebDriver();
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        driver.get(URL);
+
+        init(URL,30); //ovdje i browswer treba dodat
     }
 
 
-    @Test
-    public void registerToTehnomanija(){
+    @Test(description="This is user registration test")
+    @Description("Klik na PRIJAVA pa Registrujte se i popunjavanje polja za registraciju")
+    public void registerToTehnomanija() throws IOException {
         tehnomanijaRegistracijaPage = new TehnomanijaRegistracijaPage(driver);
         tehnomanijaHomePage = new TehnomanijaHomePage(driver);
 
@@ -40,22 +43,19 @@ public class TehnomanijaTests {
         tehnomanijaHomePage.checkSocialLinks();
         tehnomanijaHomePage.clickPrijava();
         tehnomanijaHomePage.clickRegistrujSe();
-        /*
-        JavascriptExecutor executor = (JavascriptExecutor)driver;
-        executor.executeScript("document.body.style.zoom = '0.5'");
-        */
-
         tehnomanijaRegistracijaPage.checkRegistrationPage();
         tehnomanijaRegistracijaPage.checkSocialLinks();
         tehnomanijaRegistracijaPage.register();
+        takeScreenshot("RegisterPage");
 
-
-
+    /*
+        JavascriptExecutor executor = (JavascriptExecutor)driver;
+        executor.executeScript("document.body.style.zoom = '0.5'");
+        */
     }
 
     @AfterMethod
     public void tearDown(){
-
-        //driverManager.quitWebDriver();
+        //quitDriver();
     }
 }
